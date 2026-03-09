@@ -424,6 +424,24 @@
       margin-top: auto;
     }
 
+    .cover {
+      margin-top: 0.95rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      background: rgba(151, 39, 54, 0.03);
+      box-shadow: 0 10px 26px rgba(151, 39, 54, 0.06);
+    }
+
+    .cover img {
+      width: 100%;
+      height: clamp(220px, 32vw, 360px);
+      object-fit: contain;
+      display: block;
+      background: rgba(253, 251, 251, 0.9);
+      padding: 10px;
+    }
+
     .download-badge {
       padding: 0.55rem 0.75rem;
       border-radius: 999px;
@@ -693,13 +711,13 @@ Gennaio 2026
         </div>
         <div>
           <h2 class="section-title" id="title-scarica">Scarica il report</h2>
-          <p class="section-text">
-            Scarica il report completo in formato PDF.
-          </p>
+          <p class="section-text">Scarica il report completo in formato PDF.</p>
+          <figure class="cover" aria-label="Copertina del report">
+            <img src="https://raw.githubusercontent.com/ematarti/Report_CPR_2026/main/CPR_report_cover.png" alt="Copertina del report" loading="lazy" />
+          </figure>
         </div>
         <div class="download-row">
           <a class="btn btn-primary" href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf" target="_blank" rel="noopener">Scarica il PDF</a>
-          <a class="btn btn-ghost" href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf" target="_blank" rel="noopener">Apri in nuova scheda</a>
         </div>
       </section>
 
