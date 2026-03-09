@@ -1123,6 +1123,13 @@ main {
 	text-align: center;
 }
 
+#idqog {
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
 @page {
 	size: A4 landscape;
 	margin: 10mm;
@@ -1229,7 +1236,7 @@ main {
 
 <body id="icjo" class="gjs-t-body">
   <header aria-label="Navigazione principale" class="topbar">
-    <div class="shell topbar-inner">
+    <div class="shell topbar-inner" id="idqog">
       <div aria-label="Titolo sito" class="brand">
         <div aria-hidden="true" class="brand-mark"></div>
         <div class="brand-text">CPR d'Italia: istituzioni totali. Report TAI 2026</div>
@@ -1310,10 +1317,9 @@ main {
           </p>
           <figure aria-label="Copertina del report" class="cover"><img src="https://raw.githubusercontent.com/ematarti/Report_CPR_2026/main/CPR_report_cover.png" alt="Copertina del report" loading="lazy"/>
           </figure>
-        </div>
-        <div class="download-row"><a
-            href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf"
-            target="_blank" rel="noopener" class="btn btn-primary">Scarica il PDF</a></div>
+        </div><a href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf"
+          target="_blank" rel="noopener" class="btn btn-primary" id="iqvkrc">Scarica il PDF</a>
+        <div class="download-row"></div>
       </section>
     </div>
   </main>
