@@ -1,2012 +1,1418 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-  <style> * {
-	box-sizing:border-box;
-}
-body {
-	margin:0;
-}
-:root {
-	--gjs-t-color-primary:#cf549e;
-	--gjs-t-color-secondary:#b9227d;
-	--gjs-t-color-accent:#ffb347;
-	--gjs-t-color-success:#28a745;
-	--gjs-t-color-warning:#ffc107;
-	--gjs-t-color-error:#dc3545;
-	--bg:#eef4fb;
-	--panel:#ffffff;
-	--panel-2:#f8fbff;
-	--text:#12253a;
-	--muted:#6a5659;
-	--line:rgba(151,39,54,0.14);
-	--max:#c8d5e7;
-	--eff:#2f6fec;
-	--eff-soft:#75b6ff;
-	--accent:#0f766e;
-	--warn:#b7791f;
-	--danger:#c53030;
-	--shadow:0 18px 55px rgba(151,39,54,0.10);
-	--wine:#972736;
-	--rose:#BD7781;
-	--paper:#FDFBFB;
-	--ink:#2b2022;
-	--radius-xl:26px;
-	--radius-lg:18px;
-	--radius-md:12px;
-	--maxw:1120px;
-}
-body {
-	background-color:#e7e7e7;
-	font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-	padding:24px;
-	margin:0;
-	background:radial-gradient(900px 500px at 8% 0%,rgba(189,119,129,0.18),transparent 60%),radial-gradient(700px 400px at 100% 10%,rgba(151,39,54,0.12),transparent 55%),linear-gradient(180deg,#fffefe 0%,var(--paper) 48%,#faf5f6 100%);
-	color:var(--ink);
-	line-height:1.55;
-	-webkit-font-smoothing:antialiased;
-	text-rendering:optimizeLegibility;
-}
-.card {
-	max-width:700px;
-	padding:20px;
-	background-color:white;
-	border-radius:26px;
-	margin:0 auto;
-	background:linear-gradient(180deg,#ffffff 0%,#f9fbff 100%);
-	border:1px solid var(--line);
-	box-shadow:0 10px 24px rgba(17,37,58,.06);
-	min-height:0;
-}
-.gjs-t-body {
-	background-color:inherit;
-	color:inherit;
-	font-size:1rem;
-	line-height:1.75rem;
-}
-.subtitle {
-	text-align:center;
-	margin:12px 0 0;
-	padding:25px 0;
-	max-width:930px;
-	color:var(--muted);
-	font-size:17px;
-	line-height:1.42;
-}
-.gjs-t-h1 {
-	color:var(--gjs-t-color-secondary);
-	font-size:1.5rem;
-	line-height:2.5rem;
-}
-.gjs-t-h2 {
-	color:#601843;
-	font-size:1.2rem;
-	line-height:1.75rem;
-}
-.gjs-t-button {
-	background-color:var(--gjs-t-color-primary);
-	color:white;
-	border-radius:0.3rem;
-}
-.gjs-t-link {
-	color:var(--gjs-t-color-primary);
-	text-decoration:underline;
-}
-.gjs-t-border {
-	border-radius:0.3rem;
-	border-color:#e0e0e0;
-}
-#icjo {
-	padding-top:10px;
-	padding-right:10px;
-	padding-bottom:10px;
-	padding-left:10px;
-}
-* {
-	box-sizing:border-box;
-}
-html,body {
-	margin:0;
-	padding:0;
-	background:radial-gradient(circle at 0% 0%,#ffffff 0,#f7fbff 36%,#eef4fb 100%);
-	color:var(--text);
-	font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-.poster {
-	width:min(1600px,96vw);
-	min-height:900px;
-	aspect-ratio:16/9;
-	margin:0 auto;
-	padding:28px 30px 22px;
-	border-radius:30px;
-	background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(248,251,255,.98)),linear-gradient(135deg,#f8fbff 0%,#ffffff 100%);
-	border:1px solid rgba(120,145,172,.20);
-	box-shadow:var(--shadow);
-	display:grid;
-	grid-template-rows:auto auto 1fr auto;
-	gap:20px;
-	overflow:hidden;
-	position:relative;
-	isolation:isolate;
-}
-.poster::before {
-	content:"";
-	position:absolute;
-	z-index:-1;
-	border-radius:999px;
-	filter:blur(12px);
-	opacity:.55;
-	width:340px;
-	height:340px;
-	right:-90px;
-	top:-90px;
-	background:radial-gradient(circle,rgba(47,111,236,.14),rgba(47,111,236,0));
-}
-.poster::after {
-	content:"";
-	position:absolute;
-	z-index:-1;
-	border-radius:999px;
-	filter:blur(12px);
-	opacity:.55;
-	width:260px;
-	height:260px;
-	left:-70px;
-	bottom:-90px;
-	background:radial-gradient(circle,rgba(15,118,110,.10),rgba(15,118,110,0));
-}
-header {
-	display:grid;
-	grid-template-columns:1.7fr .95fr;
-	gap:20px;
-	align-items:end;
-}
-.eyebrow {
-	display:inline-flex;
-	align-items:center;
-	gap:0.45rem;
-	padding:0.45rem 0.7rem;
-	border-radius:999px;
-	background:rgba(151,39,54,0.07);
-	color:var(--wine);
-	font-size:0.78rem;
-	font-weight:700;
-	letter-spacing:.12em;
-	text-transform:uppercase;
-	border:1px solid rgba(151,39,54,0.10);
-}
-.eyebrow .dot {
-	width:8px;
-	height:8px;
-	border-radius:999px;
-	background:linear-gradient(180deg,var(--eff),var(--eff-soft));
-	box-shadow:0 0 0 4px rgba(47,111,236,.10);
-}
-h1 {
-	margin:0.9rem 0 0;
-	font-size:clamp(1.9rem,3.7vw,3rem);
-	line-height:1.08;
-	letter-spacing:-0.02em;
-	max-width:16ch;
-	font-family:Georgia,"Times New Roman",serif;
-	font-weight:700;
-}
-.badges {
-	display:flex;
-	flex-wrap:wrap;
-	gap:10px;
-	margin-top:16px;
-}
-.badge {
-	padding:9px 12px;
-	border-radius:999px;
-	background:#f7faff;
-	border:1px solid var(--line);
-	color:#466078;
-	font-size:13px;
-	font-weight:600;
-}
-.headline-note {
-	align-self:start;
-	justify-self:end;
-	background:linear-gradient(180deg,#ffffff,#f7fbff);
-	border:1px solid var(--line);
-	border-radius:24px;
-	padding:18px 18px 16px;
-	min-width:320px;
-	box-shadow:0 10px 22px rgba(17,37,58,.06);
-}
-.headline-note .label {
-	font-size:12px;
-	font-weight:800;
-	letter-spacing:.06em;
-	text-transform:uppercase;
-	color:#56718a;
-	margin-bottom:8px;
-}
-.headline-note .big {
-	font-size:28px;
-	font-weight:800;
-	letter-spacing:-.03em;
-	line-height:1;
-	margin-bottom:8px;
-}
-.headline-note p {
-	margin:0;
-	color:var(--muted);
-	line-height:1.45;
-	font-size:14px;
-}
-.stats {
-	display:grid;
-	grid-template-columns:repeat(4,1fr);
-	gap:16px;
-}
-.stat {
-	background:linear-gradient(180deg,#ffffff 0%,#f9fbff 100%);
-	border:1px solid var(--line);
-	border-radius:22px;
-	padding:18px 18px 16px;
-	box-shadow:0 8px 18px rgba(17,37,58,.05);
-}
-.stat .label {
-	color:#5c738a;
-	font-size:12px;
-	font-weight:800;
-	text-transform:uppercase;
-	letter-spacing:.05em;
-	margin-bottom:8px;
-}
-.stat .value {
-	font-size:36px;
-	font-weight:850;
-	letter-spacing:-.04em;
-	line-height:1;
-	margin-bottom:8px;
-}
-.stat .sub {
-	color:var(--muted);
-	font-size:13px;
-	line-height:1.35;
-}
-.main {
-	display:grid;
-	grid-template-columns:1.9fr 1fr;
-	gap:20px;
-	min-height:0;
-}
-.section-head {
-	display:flex;
-	justify-content:space-between;
-	align-items:flex-end;
-	gap:12px;
-	margin-bottom:14px;
-}
-.section-head h2 {
-	margin:0;
-	font-size:22px;
-	line-height:1.08;
-	letter-spacing:-.02em;
-}
-.section-head p {
-	margin:6px 0 0;
-	color:var(--muted);
-	font-size:14px;
-	line-height:1.35;
-	max-width:760px;
-}
-.legend {
-	display:flex;
-	flex-wrap:wrap;
-	gap:14px;
-	justify-content:flex-end;
-	color:#557088;
-	font-size:12.5px;
-	font-weight:700;
-}
-.legend .item {
-	display:flex;
-	align-items:center;
-	gap:8px;
-}
-.swatch {
-	width:14px;
-	height:14px;
-	border-radius:999px;
-	border:1px solid rgba(0,0,0,.05);
-	flex:0 0 auto;
-}
-.swatch.max {
-	background:var(--max);
-}
-.swatch.eff {
-	background:linear-gradient(180deg,var(--eff),var(--eff-soft));
-}
-.swatch.na {
-	background:repeating-linear-gradient(135deg,#edf2f8 0,#edf2f8 5px,#dfe7f1 5px,#dfe7f1 10px);
-	border-radius:4px;
-}
-.rows {
-	display:grid;
-	gap:11px;
-}
-.name .title {
-	font-size:16px;
-	font-weight:780;
-	letter-spacing:-.01em;
-	line-height:1.15;
-	word-break:break-word;
-}
-.name .nums {
-	margin-top:5px;
-	font-size:12.5px;
-	color:var(--muted);
-	line-height:1.3;
-}
-.pct strong {
-	display:block;
-	font-size:21px;
-	line-height:1;
-	letter-spacing:-.02em;
-	margin-bottom:4px;
-}
-.pct span {
-	color:var(--muted);
-	font-size:12.5px;
-	line-height:1.3;
-}
-.pct .na {
-	color:#8b9aad;
-	font-weight:700;
-	letter-spacing:.02em;
-}
-.side {
-	display:grid;
-	grid-template-rows:auto auto 1fr;
-	gap:16px;
-	min-height:0;
-}
-.hero-card {
-	padding:clamp(1.25rem,2vw,1.8rem);
-	background:radial-gradient(500px 220px at 6% 4%,rgba(189,119,129,0.20),transparent 72%),radial-gradient(460px 220px at 96% 14%,rgba(151,39,54,0.14),transparent 70%),linear-gradient(180deg,rgba(255,255,255,0.94),rgba(253,251,251,0.96));
-	position:relative;
-	overflow:hidden;
-	border-radius:var(--radius-xl);
-	border:1px solid rgba(151,39,54,0.10);
-	box-shadow:var(--shadow);
-}
-.hero-card .mini {
-	display:inline-block;
-	margin-bottom:10px;
-	font-size:12px;
-	font-weight:800;
-	text-transform:uppercase;
-	letter-spacing:.06em;
-	color:#466078;
-}
-.hero-card .callout {
-	font-size:33px;
-	line-height:1.03;
-	letter-spacing:-.04em;
-	font-weight:850;
-	margin:0 0 10px;
-}
-.hero-card p {
-	margin:0;
-	color:var(--muted);
-	font-size:14px;
-	line-height:1.45;
-}
-.mini-stats {
-	display:grid;
-	grid-template-columns:repeat(2,1fr);
-	gap:12px;
-	margin-top:14px;
-}
-.mini-box {
-	border:1px solid var(--line);
-	border-radius:18px;
-	padding:12px 12px 10px;
-	background:#ffffff;
-}
-.mini-box .k {
-	font-size:11px;
-	text-transform:uppercase;
-	letter-spacing:.06em;
-	font-weight:800;
-	color:#60768c;
-	margin-bottom:6px;
-}
-.mini-box .v {
-	font-size:24px;
-	font-weight:850;
-	letter-spacing:-.03em;
-	line-height:1;
-	margin-bottom:4px;
-}
-.mini-box .t {
-	color:var(--muted);
-	font-size:12.5px;
-	line-height:1.3;
-}
-.insight-card h3,.rank-card h3 {
-	margin:0 0 12px;
-	font-size:18px;
-	line-height:1.15;
-	letter-spacing:-.02em;
-}
-.insight-list {
-	display:grid;
-	gap:10px;
-}
-.insight .rank {
-	width:28px;
-	height:28px;
-	border-radius:999px;
-	display:grid;
-	place-items:center;
-	font-weight:800;
-	font-size:13px;
-	background:#eaf1ff;
-	color:#2b58b0;
-}
-.insight .place {
-	font-size:14px;
-	font-weight:760;
-	line-height:1.2;
-}
-.insight .desc {
-	grid-column:2 / 3;
-	color:var(--muted);
-	font-size:12.5px;
-	line-height:1.3;
-	margin-top:2px;
-}
-.insight .delta {
-	text-align:right;
-	font-size:20px;
-	line-height:1;
-	font-weight:850;
-	letter-spacing:-.03em;
-	color:var(--danger);
-	white-space:nowrap;
-}
-.rank-grid {
-	display:grid;
-	gap:10px;
-	margin-top:8px;
-}
-.pill .tag {
-	font-weight:760;
-}
-.pill .score {
-	font-weight:850;
-	letter-spacing:-.01em;
-}
-.good .score {
-	color:var(--accent);
-}
-.low .score {
-	color:var(--warn);
-}
-footer {
-	display:flex;
-	justify-content:space-between;
-	gap:18px;
-	align-items:flex-start;
-	color:#61758a;
-	font-size:12.5px;
-	line-height:1.45;
-	padding-top:2px;
-	padding:1rem 0 2.5rem;
-}
-.foot-left {
-	max-width:900px;
-}
-html {
-	scroll-behavior:smooth;
-}
-a {
-	color:inherit;
-	text-decoration:none;
-}
-.shell {
-	width:min(100% - 2rem,var(--maxw));
-	margin-inline:auto;
-}
-.topbar {
-	position:sticky;
-	top:0;
-	z-index:30;
-	backdrop-filter:blur(10px);
-	background:rgba(253,251,251,0.82);
-	border-bottom:1px solid rgba(151,39,54,0.08);
-}
-.topbar-inner {
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
-	gap:1rem;
-	min-height:72px;
-}
-.brand {
-	display:flex;
-	align-items:center;
-	gap:0.75rem;
-	min-width:0;
-}
-.brand-mark {
-	width:34px;
-	height:34px;
-	border-radius:10px;
-	background:linear-gradient(135deg,var(--wine),var(--rose));
-	box-shadow:0 8px 20px rgba(151,39,54,0.18);
-	position:relative;
-	flex:0 0 auto;
-}
-.brand-mark::after {
-	content:"";
-	position:absolute;
-	inset:7px;
-	border-radius:7px;
-	border:1px solid rgba(253,251,251,0.65);
-}
-.brand-text {
-	font-size:0.95rem;
-	font-weight:600;
-	color:var(--wine);
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	max-width:48vw;
-}
-.nav {
-	display:flex;
-	align-items:center;
-	gap:0.35rem;
-	flex-wrap:wrap;
-	justify-content:flex-end;
-}
-.nav a {
-	color:var(--muted);
-	font-size:0.92rem;
-	font-weight:600;
-	padding:0.6rem 0.85rem;
-	border-radius:999px;
-	transition:background-color .2s ease,color .2s ease,transform .2s ease;
-}
-.nav a:hover {
-	color:var(--wine);
-	background:rgba(151,39,54,0.06);
-	transform:translateY(-1px);
-}
-.hero {
-	padding:3.8rem 0 2rem;
-}
-.hero-grid {
-	display:grid;
-	grid-template-columns:1.25fr 0.75fr;
-	gap:1rem;
-	align-items:stretch;
-}
-.hero-actions {
-	margin-top:1.15rem;
-	display:flex;
-	flex-wrap:wrap;
-	gap:0.7rem;
-}
-.btn {
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	gap:0.45rem;
-	padding:0.8rem 1rem;
-	border-radius:12px;
-	font-weight:700;
-	font-size:0.94rem;
-	border:1px solid transparent;
-	transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease;
-	cursor:pointer;
-	user-select:none;
-}
-.btn-primary {
-	color:#fff;
-	background:linear-gradient(135deg,var(--wine),#a93b4a 60%,var(--rose));
-	box-shadow:0 12px 24px rgba(151,39,54,0.18);
-}
-.btn-primary:hover {
-	transform:translateY(-1px);
-}
-.btn-ghost {
-	color:var(--wine);
-	background:rgba(151,39,54,0.04);
-	border-color:rgba(151,39,54,0.12);
-}
-.btn-ghost:hover {
-	transform:translateY(-1px);
-	background:rgba(151,39,54,0.07);
-}
-.hero-panel {
-	border-radius:var(--radius-lg);
-	border:1px solid rgba(151,39,54,0.10);
-	background:linear-gradient(180deg,rgba(255,255,255,0.92),rgba(253,251,251,0.9));
-	padding:1rem;
-	display:flex;
-	flex-direction:column;
-	justify-content:space-between;
-	gap:0.8rem;
-	min-height:100%;
-}
-.mini-list {
-	display:grid;
-	gap:0.55rem;
-	margin:0;
-	padding:0;
-	list-style:none;
-}
-.mini-list li {
-	display:flex;
-	align-items:center;
-	justify-content:space-between;
-	gap:0.75rem;
-	padding:0.7rem 0.8rem;
-	border:1px solid rgba(151,39,54,0.08);
-	border-radius:12px;
-	background:rgba(253,251,251,0.85);
-}
-.mini-list span:first-child {
-	color:var(--ink);
-	font-weight:600;
-	font-size:0.92rem;
-}
-.mini-list span:last-child {
-	color:var(--wine);
-	font-size:0.78rem;
-	font-weight:700;
-	letter-spacing:.04em;
-	text-transform:uppercase;
-}
-.mini-jump {
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	padding:0.45rem 0.7rem;
-	border-radius:999px;
-	font-size:0.82rem;
-	font-weight:800;
-	letter-spacing:.06em;
-	text-transform:uppercase;
-	color:var(--wine);
-	background:rgba(151,39,54,0.05);
-	border:1px solid rgba(151,39,54,0.14);
-	transition:transform .2s ease,background-color .2s ease;
-	white-space:nowrap;
-}
-.mini-jump:hover {
-	transform:translateY(-1px);
-	background:rgba(151,39,54,0.08);
-}
-main {
-	padding:1rem 0 4rem;
-}
-.section-grid {
-	display:grid;
-	gap:1rem;
-	grid-template-columns:repeat(2,minmax(0,1fr));
-}
-.section-card {
-	position:relative;
-	border-radius:20px;
-	border:1px solid var(--line);
-	background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(253,251,251,0.92));
-	box-shadow:0 12px 34px rgba(151,39,54,0.06);
-	padding:1.15rem;
-	display:grid;
-	gap:0.95rem;
-	min-height:240px;
-	scroll-margin-top:100px;
-}
-.section-card::before {
-	content:"";
-	position:absolute;
-	inset:0;
-	border-radius:inherit;
-	pointer-events:none;
-	background:radial-gradient(360px 120px at 100% 0%,rgba(189,119,129,0.10),transparent 60%);
-}
-.section-header {
-	display:flex;
-	align-items:flex-start;
-	justify-content:space-between;
-	gap:0.75rem;
-}
-.section-index {
-	width:2.25rem;
-	height:2.25rem;
-	border-radius:12px;
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	font-weight:800;
-	font-size:0.9rem;
-	color:var(--wine);
-	background:rgba(151,39,54,0.07);
-	border:1px solid rgba(151,39,54,0.10);
-	flex:0 0 auto;
-}
-.status {
-	font-size:0.78rem;
-	font-weight:700;
-	letter-spacing:.09em;
-	text-transform:uppercase;
-	color:var(--muted);
-	background:rgba(151,39,54,0.04);
-	border:1px solid rgba(151,39,54,0.08);
-	padding:0.45rem 0.6rem;
-	border-radius:999px;
-	white-space:nowrap;
-}
-.section-title {
-	margin:0;
-	font-family:Georgia,"Times New Roman",serif;
-	font-size:1.4rem;
-	line-height:1.15;
-	letter-spacing:-0.01em;
-}
-.section-text {
-	margin:0;
-	color:var(--muted);
-	font-size:0.97rem;
-	max-width:52ch;
-}
-.summary {
-	margin:0.2rem 0 0;
-	padding-left:1.1rem;
-	color:var(--muted);
-	font-size:0.95rem;
-	line-height:1.55;
-}
-.summary li {
-	margin:0.25rem 0;
-}
-.download-row {
-	display:flex;
-	flex-wrap:wrap;
-	align-items:center;
-	gap:0.7rem;
-	margin-top:auto;
-}
-.cover {
-	margin-top:0.95rem;
-	border-radius:16px;
-	overflow:hidden;
-	border:1px solid rgba(151,39,54,0.10);
-	background:rgba(151,39,54,0.03);
-	box-shadow:0 10px 26px rgba(151,39,54,0.06);
-}
-.cover img {
-	width:100%;
-	height:clamp(220px,32vw,360px);
-	object-fit:contain;
-	display:block;
-	background:rgba(253,251,251,0.9);
-	padding:10px;
-}
-.chat-input .field {
-	flex:1;
-	min-height:40px;
-	border-radius:10px;
-	border:1px solid rgba(151,39,54,0.08);
-	background:rgba(255,255,255,0.95);
-	padding:0.6rem 0.75rem;
-	color:var(--muted);
-	font-size:0.9rem;
-}
-.embed {
-	border-radius:18px;
-	overflow:hidden;
-	border:1px solid rgba(151,39,54,0.10);
-	background:rgba(253,251,251,0.85);
-	box-shadow:0 12px 34px rgba(151,39,54,0.06);
-}
-.embed iframe {
-	width:100%;
-	border:0;
-	display:block;
-	height:clamp(520px,56.25vw,860px);
-}
-.footer-card {
-	border-radius:16px;
-	border:1px solid rgba(151,39,54,0.08);
-	background:rgba(253,251,251,0.8);
-	padding:0.95rem 1rem;
-	color:var(--muted);
-	font-size:0.9rem;
-	display:block;
-	justify-content:space-between;
-	gap:1rem;
-	flex-wrap:wrap;
-}
-.footer-card strong {
-	color:var(--wine);
-}
-.footer-card p {
-	margin:0 0 0.85rem;
-	width:100%;
-	max-width:none;
-}
-.footer-card p:last-child {
-	margin-bottom:0;
-}
-.footer-card .orgs {
-	font-size:0.86rem;
-	line-height:1.65;
-	color:rgba(106,86,89,0.92);
-}
-.footer-card .date {
-	font-weight:700;
-	color:var(--wine);
-}
-#webchat .bpWebchat,#bp-embedded-webchat .bpWebchat {
-	position:absolute !important;
-	top:0 !important;
-	left:0 !important;
-	right:0 !important;
-	bottom:0 !important;
-	width:100% !important;
-	height:100% !important;
-	max-height:100% !important;
-	max-width:100% !important;
-}
-#bp-embedded-webchat {
-	position:relative;
-	width:100%;
-	height:520px;
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:0px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#if3vr7 {
-	text-align:justify;
-}
-#site-title {
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:0px;
-	margin-top:14.4px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-	color:#a83a49;
-	text-align:center;
-}
-#title-il-report {
-	text-align:center;
-	color:#972636;
-}
-#ilzje {
-	text-align:left;
-}
-#ixoll9 {
-	text-align:justify;
-}
-#ijmlds {
-	text-align:justify;
-}
-#title-scarica {
-	text-align:center;
-	color:#972636;
-}
-#i83qe4 {
-	text-align:justify;
-}
-#ib8jni {
-	text-align:justify;
-}
-#ik86k {
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:0px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#i6vs2y {
-	text-align:justify;
-}
-#i0f53z {
-	text-align:justify;
-}
-#icicli {
-	text-align:justify;
-}
-#title-qa {
-	color:#972736;
-	text-align:center;
-}
-#iph54 {
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#title-infografiche {
-	text-align:center;
-	color:#972636;
-}
-#infografiche {
-	padding-top:18.4px;
-	padding-right:18.4px;
-	padding-bottom:20px;
-	padding-left:20px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#qa-con-il-chatbot {
-	padding-top:10px;
-	padding-right:18.4px;
-	padding-bottom:0px;
-	padding-left:18.4px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#i87kv4 {
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:0px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#infografica-frame {
-	height:464px;
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:0px;
-}
-#il-report {
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-}
-#icl7qq {
-	text-align:left;
-}
-#iwa2nn {
-	text-align:center;
-}
-#iroair {
-	text-align:center;
-}
-#imdi7 {
-	padding-top:16px;
-	padding-right:0px;
-	padding-bottom:10px;
-	padding-left:0px;
-}
-#ikhqm {
-	padding-top:60.8px;
-	padding-right:0px;
-	padding-bottom:10px;
-	padding-left:0px;
-}
-#iql2v {
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:0px;
-	margin-left:0px;
-	padding-top:0px;
-	padding-right:0px;
-	padding-bottom:0px;
-	padding-left:17.6px;
-}
-#i50gzc {
-	color:#9e2f3e;
-}
-#iuru0s {
-	color:#9d2d3c;
-}
-#igrsrf {
-	color:#9d2d3c;
-}
-#ispnix {
-	color:#9d2d3c;
-}
-#ispxpe {
-	color:#9d2d3c;
-}
-#i6jv3t {
-	color:#a13241;
-}
-@page {
-	size:A4 landscape;
-	margin:10mm;
-}
-@page {
-	size:A4 landscape;
-	margin:10mm;
-}
-@media (max-width:1320px) {
-	body {
-	padding:14px;
-}
-.poster {
-	width:100%;
-	min-height:auto;
-	aspect-ratio:auto;
-}
-.main,header {
-	grid-template-columns:1fr;
-}
-.headline-note {
-	justify-self:stretch;
-	min-width:0;
-}
-.stats {
-	grid-template-columns:repeat(2,1fr);
-}
-}@media (max-width:940px) {
-	.hero-grid {
-	grid-template-columns:1fr;
-}
-.section-grid {
-	grid-template-columns:1fr;
-}
-.brand-text {
-	max-width:60vw;
-}
-}@media (max-width:900px) {
-	.stats {
-	grid-template-columns:1fr;
-}
-.legend {
-	justify-content:flex-start;
-}
-footer {
-	flex-direction:column;
-}
-}@media (max-width:640px) {
-	.topbar-inner {
-	min-height:64px;
-	align-items:flex-start;
-	flex-direction:column;
-	justify-content:center;
-	padding-block:0.55rem;
-}
-.nav {
-	width:100%;
-	gap:0.2rem;
-}
-.nav a {
-	padding:0.45rem 0.65rem;
-	font-size:0.87rem;
-}
-.hero {
-	padding-top:2.2rem;
-}
-.section-card {
-	min-height:unset;
-}
-.footer-card {
-	font-size:0.86rem;
-}
-} </style>
-  <title>CPR d'Italia: istituzioni totali. Report TAI 2026</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index,follow">
-  <meta name="generator" content="GrapesJS Studio">
+  <meta name="robots" content="index,follow" />
+  <meta name="generator" content="GrapesJS Studio" />
   <meta name="description" content="CPR d'Italia: istituzioni totali. Report TAI 2026" />
+  <meta name="site-version" content="20260309-4" />
+  <title>CPR d'Italia: istituzioni totali. Report TAI 2026</title>
   <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-</head>
 
-<body id="icjo" class="gjs-t-body">
-  <header aria-label="Navigazione principale" class="topbar">
-    <div class="shell topbar-inner" id="idqog">
-      <div aria-label="Titolo sito" class="brand">
-        <div aria-hidden="true" class="brand-mark"></div>
-        <div class="brand-text">CPR d'Italia: istituzioni totali. Report TAI 2026</div>
-      </div>
-      <nav class="nav"><a href="#il-report" id="i7kdv">Il report</a><a href="#scarica-il-report" id="ia82u">Scarica il
-          PDF</a><a href="#infografiche">Infografica</a><a href="#qa-con-il-chatbot" id="iff8e">Q&amp;A</a></nav>
-    </div>
-  </header>
-  <div class="shell hero" id="ikhqm">
-    <section aria-labelledby="site-title" class="hero-card" id="iph54">
-      <div class="hero-grid" id="iwnun">
-        <div id="i5y2y">
-          <div id="if3vr7"><br/>Secondo rapporto di monitoraggio del Tavolo Asilo e Immigrazione sui CPR di Bari, Brindisi, Caltanissetta, Gradisca d’Isonzo, Macomer, Milano, Palazzo San Gervasio, Roma, Torino e Trapani.
-          </div>
-        </div>
-        <h1 id="site-title">CPR d'Italia: istituzioni totali</h1>
-        <div aria-label="Azioni rapide" class="hero-actions"><a href="#il-report" class="btn btn-primary"
-            id="i8cja">Esplora le sezioni</a><a href="#scarica-il-report" class="btn btn-ghost" id="iye9v">Vai al
-            download</a></div>
-      </div>
-      <aside aria-label="Panoramica contenuti" class="hero-panel">
-        <ul class="mini-list">
-          <li><span id="i50ye">Perché questo report?</span><a href="#il-report" class="mini-jump">Vai</a></li>
-          <li><span>Scarica il report</span><a href="#scarica-il-report" class="mini-jump">Vai</a></li>
-          <li><span id="iewms">Infografica: l’(in)utilità dei CPR</span><a href="#infografiche"
-              class="mini-jump">Vai</a></li>
-          <li><span id="i14tj">Q&amp;A con il chatbot</span><a href="#qa-con-il-chatbot" class="mini-jump">Vai</a></li>
-        </ul>
-      </aside>
-    </section>
-  </div>
-  <main aria-label="Sezioni della pagina" class="shell" id="imdi7">
-    <div class="section-grid">
-      <section id="il-report" aria-labelledby="title-il-report" class="section-card">
-        <div class="section-header">
-          <div aria-hidden="true" class="section-index">01</div>
-          <div class="status">In evidenza</div>
-        </div>
-        <div id="ik86k">
-          <h2 id="title-il-report" class="section-title">Perché questo report </h2>
-          <p class="section-text" id="ik8oa"><br/>
-          <div>Perché il Tavolo Asilo e Immigrazione continua a documentare e denunciare le violazioni nei CPR?</div>
-          <div id="ilz76f"><br/></div>
-          <div id="icl7qq">Ecco perché, in cinque punti:</div>
-          </p>
-        </div>
-        <ol class="summary" id="iql2v">
-          <li id="ilzje">
-            <div id="ixoll9">Perché è necessario mettere in luce la
-              <b id="i93615"><span data-gs-mrk-color="" id="i50gzc">natura illegittima, inefficace e disumana</span></b>
-              della detenzione amministrativa e dei CPR.</div>
-          </li>
-          <li id="i47fl">
-            <div id="ijmlds">Perché inchieste pluridecennali
-              confermano <b><span data-gs-mrk-color="" id="iuru0s">violazioni sistematiche dei diritti </span></b>fondamentali<b id="ia3rxg">.</b>
-            </div>
-          </li>
-          <li id="ijsns">
-            <div id="i83qe4">Perché i CPR sono
-              un’<b id="iczf5u"><span data-gs-mrk-color="" id="igrsrf">aberrazione strutturale</span></b>- e non
-              accidentale -<b id="ijbp72"> <span data-gs-mrk-color="" id="ispnix">del sistema</span></b>.</div>
-          </li>
-          <li id="infhm">
-            <div id="ib8jni">Perché i CPR sono costosi e falliscono gli obiettivi dichiarati con
-              <b id="i6teok"><span data-gs-mrk-color="" id="ispxpe">spreco di risorse pubbliche</span></b>.</div>
-          </li>
-          <li id="iardz">
-            <div id="i6vs2y">Perché le conseguenze per le persone trattenute sono
-              <b id="ib9v9l"><span data-gs-mrk-color="" id="i6jv3t">sofferenza, degrado </span></b>e, in alcuni casi,
-              morte.</div>
-          </li>
-        </ol>
-      </section>
-      <section id="scarica-il-report" aria-labelledby="title-scarica" class="section-card">
-        <div class="section-header" id="iyeih">
-          <div aria-hidden="true" class="section-index">02</div>
-          <div class="status">PDF</div>
-        </div>
-        <div id="idrpvc">
-          <h2 id="title-scarica" class="section-title">Scarica il report</h2>
-          <p class="section-text" id="iwr7ti"><br/>
-          <div id="iwa2nn">Scarica il report completo in formato PDF</div>
-          </p>
-          <figure aria-label="Copertina del report" class="cover"><img src="https://raw.githubusercontent.com/ematarti/Report_CPR_2026/main/CPR_report_cover.png" alt="Copertina del report" loading="lazy"/>
-          </figure>
-        </div><a href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf"
-          target="_blank" rel="noopener" class="btn btn-primary" id="iqvkrc">Scarica il PDF</a>
-        <div class="download-row" id="itk05a"></div>
-      </section>
-    </div>
-  </main>
-  <section id="infografiche" aria-labelledby="title-infografiche" class="section-card">
-    <div class="section-header">
-      <div aria-hidden="true" class="section-index">03</div>
-      <div class="status">Visual abstract</div>
-    </div>
-    <div id="in656z">
-      <h2 id="title-infografiche" class="section-title">Infografica: l’(in)utilità dei CPR | capienza massima vs
-        effettiva</h2>
-    </div>
-    <div aria-label="Infografica incorporata" class="embed"><iframe frameborder="0" id="infografica-frame"
-        title="CPR in Italia — Capienza massima vs effettiva" loading="lazy" sandbox="allow-scripts"></iframe></div>
-  </section>
-  <section id="qa-con-il-chatbot" aria-labelledby="title-qa" class="section-card">
-    <div class="section-header">
-      <div aria-hidden="true" class="section-index">04</div>
-      <div class="status">Chatbot</div>
-    </div>
-    <div id="i87kv4">
-      <h2 id="title-qa" class="section-title">Hai una domanda sul report? Il chatbot risponde!</h2>
-    </div>
-    <div id="bp-embedded-webchat"></div>
-    <script src="https://files.bpcontent.cloud/2026/02/11/15/20260211154922-QE1NF98Z.js" defer></script>
-  </section>
-  <footer aria-label="Crediti e informazioni" class="shell">
-    <div class="footer-card">
-      <p id="i0j4ek">
-      <div id="icicli">Questo report è stato realizzato dalle organizzazioni aderenti al Tavolo Asilo e Immigrazione
-        (TAI), una rete della società civile impegnata nella tutela dei diritti delle persone migranti, rifugiate e
-        richiedenti asilo.</div>
-      </p>
-      <p class="orgs" id="ij522o">
-      <div id="i0f53z">A Buon Diritto, ACLI, Action Aid, Agenzia Scalabriniana per la Cooperazione allo Sviluppo,
-        Amnesty International Italia, ARCI, ASGI, Avvocato di Strada Onlus, Caritas Italiana, Casa dei Diritti Sociali,
-        Centro Astalli, CGIL, CIES, CIR, CNCA, Commissione Migranti e GPIC Missionari Comboniani Italia, Comunità di
-        Sant’Egidio, Comunità Papa Giovanni XXIII, CoNNGI, Emergency, Ero Straniero, Europasilo, FCEI, Fondazione
-        Migrantes, Forum per cambiare l’ordine delle cose, International Rescue Committee Italia, INTERSOS, Legambiente,
-        Medici del Mondo Italia, Medici per i Diritti Umani, Movimento Italiani senza Cittadinanza, Medici Senza
-        Frontiere Italia, Oxfam Italia, Re.Co.Sol, Red Nova, Refugees Welcome Italia, Save the Children, Senza Confine,
-        SIMM, UIL, UNIRE.</div>
-      </p>
-      <p class="date" id="iroair">Il Rapporto è stato ultimato il 21 gennaio 2026</p>
-    </div>
-  </footer><template id="infographic-src">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPR in Italia — Capienza massima vs effettiva</title>
-    <style>
-      :root {
-        --bg: #eef4fb;
-        --panel: #ffffff;
-        --panel-2: #f8fbff;
-        --text: #12253a;
-        --muted: #61758a;
-        --line: #dbe6f1;
-        --max: #c8d5e7;
-        --eff: #2f6fec;
-        --eff-soft: #75b6ff;
-        --accent: #0f766e;
-        --warn: #b7791f;
-        --danger: #c53030;
-        --shadow: 0 16px 40px rgba(17, 37, 58, 0.10);
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --wine: #972736;
+      --rose: #BD7781;
+      --paper: #FDFBFB;
+      --ink: #2b2022;
+      --text: #12253a;
+      --muted: #6a5659;
+      --line: rgba(151, 39, 54, 0.14);
+      --accent: #0f766e;
+      --warn: #b7791f;
+      --danger: #c53030;
+      --max: #c8d5e7;
+      --eff: #2f6fec;
+      --eff-soft: #75b6ff;
+      --shadow: 0 18px 55px rgba(151, 39, 54, 0.10);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --maxw: 1120px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 0% 0%, #ffffff 0, #f7fbff 36%, #eef4fb 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background:
+        radial-gradient(900px 500px at 8% 0%, rgba(189, 119, 129, 0.18), transparent 60%),
+        radial-gradient(700px 400px at 100% 10%, rgba(151, 39, 54, 0.12), transparent 55%),
+        linear-gradient(180deg, #fffefe 0%, var(--paper) 48%, #faf5f6 100%);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(100% - 2rem, var(--maxw));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(10px);
+      background: rgba(253, 251, 251, 0.82);
+      border-bottom: 1px solid rgba(151, 39, 54, 0.08);
+      border-radius: 16px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--wine), var(--rose));
+      box-shadow: 0 8px 20px rgba(151, 39, 54, 0.18);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 7px;
+      border: 1px solid rgba(253, 251, 251, 0.65);
+    }
+
+    .brand-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--wine);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 48vw;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.6rem 0.85rem;
+      border-radius: 999px;
+      transition: background-color .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--wine);
+      background: rgba(151, 39, 54, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .lang-switch {
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--wine), #a93b4a 60%, var(--rose));
+      box-shadow: 0 12px 24px rgba(151, 39, 54, 0.18);
+    }
+
+    .hero {
+      padding: 3.8rem 0 2rem;
+    }
+
+    .hero-card {
+      padding: clamp(1.25rem, 2vw, 1.8rem);
+      background:
+        radial-gradient(500px 220px at 6% 4%, rgba(189, 119, 129, 0.20), transparent 72%),
+        radial-gradient(460px 220px at 96% 14%, rgba(151, 39, 54, 0.14), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(253, 251, 251, 0.96));
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .intro-text {
+      text-align: justify;
+    }
+
+    #site-title {
+      margin: 14px 0 0;
+      color: #a83a49;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.9rem, 3.7vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      margin-top: 1.15rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--wine), #a93b4a 60%, var(--rose));
+      box-shadow: 0 12px 24px rgba(151, 39, 54, 0.18);
+    }
+
+    .btn-primary:hover,
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      color: var(--wine);
+      background: rgba(151, 39, 54, 0.04);
+      border-color: rgba(151, 39, 54, 0.12);
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(253, 251, 251, 0.9));
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.8rem;
+      min-height: 100%;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.7rem 0.8rem;
+      border: 1px solid rgba(151, 39, 54, 0.08);
+      border-radius: 12px;
+      background: rgba(253, 251, 251, 0.85);
+    }
+
+    .mini-list span:first-child {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .mini-jump {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--wine);
+      background: rgba(151, 39, 54, 0.05);
+      border: 1px solid rgba(151, 39, 54, 0.14);
+      transition: transform .2s ease, background-color .2s ease;
+      white-space: nowrap;
+    }
+
+    .mini-jump:hover {
+      transform: translateY(-1px);
+      background: rgba(151, 39, 54, 0.08);
+    }
+
+    main {
+      padding: 1rem 0 4rem;
+    }
+
+    .stack-sections {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .top-sections {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    .single-section-stack {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .single-section-stack > .section-card {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .section-card {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(253, 251, 251, 0.92));
+      box-shadow: 0 12px 34px rgba(151, 39, 54, 0.06);
+      padding: 1.15rem;
+      display: grid;
+      gap: 0.95rem;
+      min-height: 240px;
+      scroll-margin-top: 100px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(360px 120px at 100% 0%, rgba(189, 119, 129, 0.10), transparent 60%);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .section-index {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--wine);
+      background: rgba(151, 39, 54, 0.07);
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      flex: 0 0 auto;
+    }
+
+    .status {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(151, 39, 54, 0.04);
+      border: 1px solid rgba(151, 39, 54, 0.08);
+      padding: 0.45rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: #972636;
+    }
+
+    .section-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+      max-width: 52ch;
+      text-align: justify;
+    }
+
+    .section-text.centered {
+      text-align: center;
+      max-width: none;
+    }
+
+    .summary {
+      margin: 0.2rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .summary li {
+      margin: 0.25rem 0;
+      text-align: justify;
+    }
+
+    .cover {
+      margin-top: 0.95rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      background: rgba(151, 39, 54, 0.03);
+      box-shadow: 0 10px 26px rgba(151, 39, 54, 0.06);
+    }
+
+    .cover img {
+      width: 100%;
+      height: clamp(220px, 32vw, 360px);
+      object-fit: contain;
+      display: block;
+      background: rgba(253, 251, 251, 0.9);
+      padding: 10px;
+    }
+
+    .embed {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(151, 39, 54, 0.10);
+      background: rgba(253, 251, 251, 0.85);
+      box-shadow: 0 12px 34px rgba(151, 39, 54, 0.06);
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .footer-card {
+      border-radius: 16px;
+      border: 1px solid rgba(151, 39, 54, 0.08);
+      background: rgba(253, 251, 251, 0.8);
+      padding: 0.95rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .footer-card strong,
+    .footer-card .date {
+      color: var(--wine);
+    }
+
+    .footer-card p {
+      margin: 0 0 0.85rem;
+    }
+
+    .footer-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer-card .orgs {
+      font-size: 0.86rem;
+      line-height: 1.65;
+      color: rgba(106, 86, 89, 0.92);
+    }
+
+    #bp-embedded-webchat {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 520px;
+      margin: 0;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    #webchat .bpWebchat,
+    #bp-embedded-webchat .bpWebchat {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .notranslate {
+      unicode-bidi: isolate;
+    }
+
+    .term-lock {
+      display: inline-block;
+      margin-left: 0.12em;
+      margin-right: 0.12em;
+      white-space: nowrap;
+    }
+
+    /* Infografica inline */
+    .info-poster {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 24px;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.97), rgba(248,251,255,.98)),
+        linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid rgba(120,145,172,.20);
+      box-shadow: 0 10px 24px rgba(17,37,58,.06);
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 20px;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .info-poster::before,
+    .info-poster::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 999px;
+      filter: blur(12px);
+      opacity: .55;
+    }
+
+    .info-poster::before {
+      width: 340px;
+      height: 340px;
+      right: -90px;
+      top: -90px;
+      background: radial-gradient(circle, rgba(47,111,236,.14), rgba(47,111,236,0));
+    }
+
+    .info-poster::after {
+      width: 260px;
+      height: 260px;
+      left: -70px;
+      bottom: -90px;
+      background: radial-gradient(circle, rgba(15,118,110,.10), rgba(15,118,110,0));
+    }
+
+    .info-header {
+      display: grid;
+      grid-template-columns: 1.7fr .95fr;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(151, 39, 54, 0.07);
+      color: var(--wine);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(151, 39, 54, 0.10);
+    }
+
+    .eyebrow .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--eff), var(--eff-soft));
+      box-shadow: 0 0 0 4px rgba(47, 111, 236, .10);
+    }
+
+    .info-poster h1 {
+      margin: 0.9rem 0 0;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 16ch;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      max-width: 930px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.42;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .badge {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: #f7faff;
+      border: 1px solid var(--line);
+      color: #466078;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .headline-note {
+      align-self: start;
+      justify-self: end;
+      background: linear-gradient(180deg, #ffffff, #f7fbff);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px 18px 16px;
+      min-width: 320px;
+      box-shadow: 0 10px 22px rgba(17, 37, 58, .06);
+    }
+
+    .headline-note .label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #56718a;
+      margin-bottom: 8px;
+    }
+
+    .headline-note .big {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .headline-note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .info-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .info-stat {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 8px 18px rgba(17, 37, 58, .05);
+    }
+
+    .info-stat .label {
+      color: #5c738a;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 8px;
+    }
+
+    .info-stat .value {
+      font-size: 36px;
+      font-weight: 850;
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .info-stat .sub {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .info-main {
+      display: grid;
+      grid-template-columns: 1.9fr 1fr;
+      gap: 20px;
+      min-height: 0;
+    }
+
+    .info-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(17,37,58,.06);
+      min-height: 0;
+      max-width: none;
+      min-width: 0;
+    }
+
+    .info-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .info-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      text-align: left;
+      color: var(--ink);
+      font-family: inherit;
+    }
+
+    .info-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+      max-width: 760px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+      color: #557088;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .legend .item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, .05);
+      flex: 0 0 auto;
+    }
+
+    .swatch.max { background: var(--max); }
+    .swatch.eff { background: linear-gradient(180deg, var(--eff), var(--eff-soft)); }
+    .swatch.na {
+      background: repeating-linear-gradient(135deg, #edf2f8 0, #edf2f8 5px, #dfe7f1 5px, #dfe7f1 10px);
+      border-radius: 4px;
+    }
+
+    .rows {
+      display: grid;
+      gap: 11px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 230px 1fr 152px;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 12px 12px 14px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #fcfdff 0%, #f5f9fe 100%);
+      border: 1px solid #e4edf7;
+    }
+
+    .name {
+      min-width: 0;
+    }
+
+    .name .title {
+      font-size: 16px;
+      font-weight: 780;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .name .nums {
+      margin-top: 5px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    .track {
+      position: relative;
+      height: 18px;
+      border-radius: 999px;
+      background: #edf3f9;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(124,147,173,.18);
+    }
+
+    .bar-max,
+    .bar-eff,
+    .bar-na {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 999px;
+    }
+
+    .bar-max {
+      background: linear-gradient(90deg, #dbe4f0 0%, #c8d5e7 100%);
+    }
+
+    .bar-eff {
+      background: linear-gradient(90deg, var(--eff) 0%, var(--eff-soft) 100%);
+      box-shadow: 0 0 0 1px rgba(47,111,236,.10);
+    }
+
+    .bar-na {
+      background: repeating-linear-gradient(135deg, #eef2f7 0, #eef2f7 8px, #dde6f0 8px, #dde6f0 16px);
+      opacity: .95;
+      box-shadow: inset 0 0 0 1px rgba(124,147,173,.20);
+    }
+
+    .pct {
+      text-align: right;
+    }
+
+    .pct strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1;
+      letter-spacing: -.02em;
+      margin-bottom: 4px;
+    }
+
+    .pct span {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.3;
+    }
+
+    .pct .na {
+      color: #8b9aad;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .info-side {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 16px;
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .hero-card-mini {
+      padding: 20px 20px 18px;
+      background:
+        radial-gradient(circle at top right, rgba(47,111,236,.10), rgba(47,111,236,0) 38%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .hero-card-mini .mini {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #466078;
+    }
+
+    .hero-card-mini .callout {
+      font-size: 33px;
+      line-height: 1.03;
+      letter-spacing: -.04em;
+      font-weight: 850;
+      margin: 0 0 10px;
+      font-family: inherit;
+      text-align: left;
+      color: var(--ink);
+    }
+
+    .hero-card-mini p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .mini-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px 12px 10px;
+      background: #ffffff;
+    }
+
+    .mini-box .k {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 800;
+      color: #60768c;
+      margin-bottom: 6px;
+    }
+
+    .mini-box .v {
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .mini-box .t {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.3;
+    }
+
+    .insight-card h3,
+    .rank-card h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .insight-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .insight {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 12px 11px;
+      border-radius: 18px;
+      background: #fbfdff;
+      border: 1px solid #e5edf7;
+    }
+
+    .insight .rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 13px;
+      background: #eaf1ff;
+      color: #2b58b0;
+    }
+
+    .insight .place {
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.2;
+    }
+
+    .insight .desc {
+      grid-column: 2 / 3;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    .insight .delta {
+      text-align: right;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: -.03em;
+      color: var(--danger);
+      white-space: nowrap;
+    }
+
+    .rank-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: #fbfdff;
+      border: 1px solid #e5edf7;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      font-size: 13.5px;
+      line-height: 1.3;
+    }
+
+    .pill .tag { font-weight: 760; }
+    .pill .score {
+      font-weight: 850;
+      letter-spacing: -.01em;
+    }
+
+    .good .score { color: var(--accent); }
+    .low .score { color: var(--warn); }
+
+    .info-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      color: #61758a;
+      font-size: 12.5px;
+      line-height: 1.45;
+      padding-top: 2px;
+    }
+
+    .foot-left {
+      max-width: 900px;
+    }
+
+    footer.shell {
+      padding-bottom: 2.5rem;
+    }
+
+    @media (max-width: 1320px) {
+      body { padding: 14px; }
+      .hero-grid,
+      .info-header,
+      .info-main {
+        grid-template-columns: 1fr;
+      }
+      .headline-note {
+        justify-self: stretch;
+        min-width: 0;
+      }
+      .info-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 940px) {
+      .top-sections {
+        grid-template-columns: 1fr;
+      }
+      .brand-text {
+        max-width: 60vw;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .info-stats {
+        grid-template-columns: 1fr;
+      }
+      .row {
+        grid-template-columns: 1fr;
+      }
+      .pct {
+        text-align: left;
+      }
+      .legend {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        min-height: 64px;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding-block: 0.55rem;
       }
 
-      * {
-        box-sizing: border-box
+      .nav {
+        width: 100%;
+        gap: 0.2rem;
       }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        background:
-          radial-gradient(circle at 0% 0%, #ffffff 0, #f7fbff 36%, #eef4fb 100%);
-        color: var(--text);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      .nav a {
+        padding: 0.45rem 0.65rem;
+        font-size: 0.87rem;
       }
 
-      body {
-        padding: 24px;
+      .hero {
+        padding-top: 2.2rem;
       }
 
-      .poster {
-        width: min(1600px, 96vw);
-        min-height: 900px;
-        aspect-ratio: 16/9;
-        margin: 0 auto;
-        padding: 28px 30px 22px;
-        border-radius: 30px;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, .97), rgba(248, 251, 255, .98)),
-          linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
-        border: 1px solid rgba(120, 145, 172, .20);
-        box-shadow: var(--shadow);
-        display: grid;
-        grid-template-rows: auto auto 1fr auto;
-        gap: 20px;
-        overflow: hidden;
-        position: relative;
-        isolation: isolate;
+      .section-card {
+        min-height: unset;
       }
 
-      .poster::before,
-      .poster::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        border-radius: 999px;
-        filter: blur(12px);
-        opacity: .55;
-      }
-
-      .poster::before {
-        width: 340px;
-        height: 340px;
-        right: -90px;
-        top: -90px;
-        background: radial-gradient(circle, rgba(47, 111, 236, .14), rgba(47, 111, 236, 0));
-      }
-
-      .poster::after {
-        width: 260px;
-        height: 260px;
-        left: -70px;
-        bottom: -90px;
-        background: radial-gradient(circle, rgba(15, 118, 110, .10), rgba(15, 118, 110, 0));
-      }
-
-      header {
-        display: grid;
-        grid-template-columns: 1.7fr .95fr;
-        gap: 20px;
-        align-items: end;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: #edf4ff;
-        color: #2858b8;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: .02em;
-        text-transform: uppercase;
-        border: 1px solid #d9e7ff;
-      }
-
-      .eyebrow .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: linear-gradient(180deg, var(--eff), var(--eff-soft));
-        box-shadow: 0 0 0 4px rgba(47, 111, 236, .10);
-      }
-
-      h1 {
-        margin: 14px 0 0;
-        font-size: 42px;
-        line-height: 1.03;
-        letter-spacing: -.035em;
-        max-width: 900px;
-      }
-
-      .subtitle {
-        margin: 12px 0 0;
-        max-width: 930px;
-        color: var(--muted);
-        font-size: 17px;
-        line-height: 1.42;
-      }
-
-      .badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 16px;
-      }
-
-      .badge {
-        padding: 9px 12px;
-        border-radius: 999px;
-        background: #f7faff;
-        border: 1px solid var(--line);
-        color: #466078;
-        font-size: 13px;
-        font-weight: 600;
+      .footer-card {
+        font-size: 0.86rem;
       }
 
       .headline-note {
-        align-self: start;
-        justify-self: end;
-        background: linear-gradient(180deg, #ffffff, #f7fbff);
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        padding: 18px 18px 16px;
-        min-width: 320px;
-        box-shadow: 0 10px 22px rgba(17, 37, 58, .06);
-      }
-
-      .headline-note .label {
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: .06em;
-        text-transform: uppercase;
-        color: #56718a;
-        margin-bottom: 8px;
-      }
-
-      .headline-note .big {
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: -.03em;
-        line-height: 1;
-        margin-bottom: 8px;
-      }
-
-      .headline-note p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.45;
-        font-size: 14px;
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-      }
-
-      .stat {
-        background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 18px 18px 16px;
-        box-shadow: 0 8px 18px rgba(17, 37, 58, .05);
-      }
-
-      .stat .label {
-        color: #5c738a;
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: .05em;
-        margin-bottom: 8px;
-      }
-
-      .stat .value {
-        font-size: 36px;
-        font-weight: 850;
-        letter-spacing: -.04em;
-        line-height: 1;
-        margin-bottom: 8px;
-      }
-
-      .stat .sub {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.35;
-      }
-
-      .main {
-        display: grid;
-        grid-template-columns: 1.9fr 1fr;
-        gap: 20px;
-        min-height: 0;
-      }
-
-      .card {
-        background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
-        border: 1px solid var(--line);
-        border-radius: 26px;
-        padding: 20px;
-        box-shadow: 0 10px 24px rgba(17, 37, 58, .06);
-        min-height: 0;
-      }
-
-      .section-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 12px;
-        margin-bottom: 14px;
-      }
-
-      .section-head h2 {
-        margin: 0;
-        font-size: 22px;
-        line-height: 1.08;
-        letter-spacing: -.02em;
-      }
-
-      .section-head p {
-        margin: 6px 0 0;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.35;
-        max-width: 760px;
-      }
-
-      .legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        justify-content: flex-end;
-        color: #557088;
-        font-size: 12.5px;
-        font-weight: 700;
-      }
-
-      .legend .item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .swatch {
-        width: 14px;
-        height: 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(0, 0, 0, .05);
-        flex: 0 0 auto;
-      }
-
-      .swatch.max {
-        background: var(--max);
-      }
-
-      .swatch.eff {
-        background: linear-gradient(180deg, var(--eff), var(--eff-soft));
-      }
-
-      .swatch.na {
-        background: repeating-linear-gradient(135deg, #edf2f8 0, #edf2f8 5px, #dfe7f1 5px, #dfe7f1 10px);
-        border-radius: 4px;
-      }
-
-      .rows {
-        display: grid;
-        gap: 11px;
-      }
-
-      .row {
-        display: grid;
-        grid-template-columns: 230px 1fr 152px;
-        gap: 14px;
-        align-items: center;
-        padding: 12px 12px 12px 14px;
-        border-radius: 20px;
-        background: linear-gradient(180deg, #fcfdff 0%, #f5f9fe 100%);
-        border: 1px solid #e4edf7;
-      }
-
-      .name {
         min-width: 0;
       }
 
-      .name .title {
-        font-size: 16px;
-        font-weight: 780;
-        letter-spacing: -.01em;
-        line-height: 1.15;
-        word-break: break-word;
+      .info-poster {
+        padding: 16px;
       }
+    }
+  </style>
+</head>
 
-      .name .nums {
-        margin-top: 5px;
-        font-size: 12.5px;
-        color: var(--muted);
-        line-height: 1.3;
-      }
+<body>
+  <header aria-label="Navigazione principale" class="topbar">
+    <div class="shell topbar-inner">
+      <div aria-label="Titolo sito" class="brand">
+        <div aria-hidden="true" class="brand-mark"></div>
+        <div class="brand-text notranslate" translate="no">CPR d'Italia: istituzioni totali. Report TAI 2026</div>
+      </div>
 
-      .track {
-        position: relative;
-        height: 18px;
-        border-radius: 999px;
-        background: #edf3f9;
-        overflow: hidden;
-        box-shadow: inset 0 0 0 1px rgba(124, 147, 173, .18);
-      }
-
-      .bar-max,
-      .bar-eff,
-      .bar-na {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        border-radius: 999px;
-      }
-
-      .bar-max {
-        background: linear-gradient(90deg, #dbe4f0 0%, #c8d5e7 100%);
-      }
-
-      .bar-eff {
-        background: linear-gradient(90deg, var(--eff) 0%, var(--eff-soft) 100%);
-        box-shadow: 0 0 0 1px rgba(47, 111, 236, .10);
-      }
-
-      .bar-na {
-        background: repeating-linear-gradient(135deg,
-            #eef2f7 0,
-            #eef2f7 8px,
-            #dde6f0 8px,
-            #dde6f0 16px);
-        opacity: .95;
-        box-shadow: inset 0 0 0 1px rgba(124, 147, 173, .20);
-      }
-
-      .pct {
-        text-align: right;
-      }
-
-      .pct strong {
-        display: block;
-        font-size: 21px;
-        line-height: 1;
-        letter-spacing: -.02em;
-        margin-bottom: 4px;
-      }
-
-      .pct span {
-        color: var(--muted);
-        font-size: 12.5px;
-        line-height: 1.3;
-      }
-
-      .pct .na {
-        color: #8b9aad;
-        font-weight: 700;
-        letter-spacing: .02em;
-      }
-
-      .side {
-        display: grid;
-        grid-template-rows: auto auto 1fr;
-        gap: 16px;
-        min-height: 0;
-      }
-
-      .hero-card {
-        padding: 20px 20px 18px;
-        background:
-          radial-gradient(circle at top right, rgba(47, 111, 236, .10), rgba(47, 111, 236, 0) 38%),
-          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-      }
-
-      .hero-card .mini {
-        display: inline-block;
-        margin-bottom: 10px;
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        color: #466078;
-      }
-
-      .hero-card .callout {
-        font-size: 33px;
-        line-height: 1.03;
-        letter-spacing: -.04em;
-        font-weight: 850;
-        margin: 0 0 10px;
-      }
-
-      .hero-card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.45;
-      }
-
-      .mini-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin-top: 14px;
-      }
-
-      .mini-box {
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        padding: 12px 12px 10px;
-        background: #ffffff;
-      }
-
-      .mini-box .k {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        font-weight: 800;
-        color: #60768c;
-        margin-bottom: 6px;
-      }
-
-      .mini-box .v {
-        font-size: 24px;
-        font-weight: 850;
-        letter-spacing: -.03em;
-        line-height: 1;
-        margin-bottom: 4px;
-      }
-
-      .mini-box .t {
-        color: var(--muted);
-        font-size: 12.5px;
-        line-height: 1.3;
-      }
-
-      .insight-card h3,
-      .rank-card h3 {
-        margin: 0 0 12px;
-        font-size: 18px;
-        line-height: 1.15;
-        letter-spacing: -.02em;
-      }
-
-      .insight-list {
-        display: grid;
-        gap: 10px;
-      }
-
-      .insight {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 10px;
-        align-items: center;
-        padding: 12px 12px 11px;
-        border-radius: 18px;
-        background: #fbfdff;
-        border: 1px solid #e5edf7;
-      }
-
-      .insight .rank {
-        width: 28px;
-        height: 28px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        font-weight: 800;
-        font-size: 13px;
-        background: #eaf1ff;
-        color: #2b58b0;
-      }
-
-      .insight .place {
-        font-size: 14px;
-        font-weight: 760;
-        line-height: 1.2;
-      }
-
-      .insight .desc {
-        grid-column: 2 / 3;
-        color: var(--muted);
-        font-size: 12.5px;
-        line-height: 1.3;
-        margin-top: 2px;
-      }
-
-      .insight .delta {
-        text-align: right;
-        font-size: 20px;
-        line-height: 1;
-        font-weight: 850;
-        letter-spacing: -.03em;
-        color: var(--danger);
-        white-space: nowrap;
-      }
-
-      .rank-grid {
-        display: grid;
-        gap: 10px;
-        margin-top: 8px;
-      }
-
-      .pill {
-        padding: 10px 12px;
-        border-radius: 16px;
-        background: #fbfdff;
-        border: 1px solid #e5edf7;
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: center;
-        font-size: 13.5px;
-        line-height: 1.3;
-      }
-
-      .pill .tag {
-        font-weight: 760;
-      }
-
-      .pill .score {
-        font-weight: 850;
-        letter-spacing: -.01em;
-      }
-
-      .good .score {
-        color: var(--accent);
-      }
-
-      .low .score {
-        color: var(--warn);
-      }
-
-      footer {
-        display: flex;
-        justify-content: space-between;
-        gap: 18px;
-        align-items: flex-start;
-        color: #61758a;
-        font-size: 12.5px;
-        line-height: 1.45;
-        padding-top: 2px;
-      }
-
-      .foot-left {
-        max-width: 900px;
-      }
-
-      .foot-right {
-        text-align: right;
-        white-space: nowrap;
-      }
-
-      @media (max-width: 1320px) {
-        body {
-          padding: 14px;
-        }
-
-        .poster {
-          width: 100%;
-          min-height: auto;
-          aspect-ratio: auto;
-        }
-
-        header,
-        .main {
-          grid-template-columns: 1fr;
-        }
-
-        .headline-note {
-          justify-self: stretch;
-          min-width: 0;
-        }
-
-        .stats {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 900px) {
-        .stats {
-          grid-template-columns: 1fr;
-        }
-
-        .row {
-          grid-template-columns: 1fr;
-        }
-
-        .pct {
-          text-align: left;
-        }
-
-        .legend {
-          justify-content: flex-start;
-        }
-
-        footer {
-          flex-direction: column;
-        }
-
-        .foot-right {
-          text-align: left;
-          white-space: normal;
-        }
-      }
-
-      @page {
-        size: A4 landscape;
-        margin: 10mm;
-      }
-    </style>
-    <div role="img"
-      aria-label="Visual abstract in italiano sul confronto tra capienza massima e capienza effettiva dei dieci CPR in Italia"
-      class="poster">
-      <header>
-        <div>
-          <div class="eyebrow"><span class="dot"></span> Visual abstract | CPR in Italia</div>
-          <h1>Capienza massima vs capienza effettiva nei 10 CPR in Italia</h1>
-          <p class="subtitle">
-            Il confronto mostra che la disponibilità effettiva dei posti è spesso molto inferiore alla capienza teorica.
-            Nei due CPR con dato non fornito, il confronto resta incompleto.
-          </p>
-          <div class="badges">
-            <span class="badge">10 CPR considerati</span><span class="badge">2 CPR con dato effettivo non disponibile</span><span class="badge">Confronto diretto tra capienza teorica e reale</span>
-          </div>
-        </div>
-        <aside class="headline-note">
-          <div class="label">Messaggio chiave</div>
-          <div class="big">546 posti effettivi noti</div>
-          <p>
-            Su <strong>1.074</strong> posti teorici riferiti agli 8 CPR con dato disponibile, la capienza effettiva nota
-            corrisponde a <strong>50,8%</strong>. La lettura dei totali effettivi esclude quindi
-            <strong>Macomer</strong> e
-            <strong>Trapani</strong>, per i quali il dato non è fornito.
-          </p>
-        </aside>
-      </header>
-      <section class="stats">
-        <div class="stat">
-          <div class="label">Capienza massima totale</div>
-          <div id="totalMax" class="value">1.238</div>
-          <div class="sub">Somma della capienza teorica dichiarata per tutti i 10 CPR.</div>
-        </div>
-        <div class="stat">
-          <div class="label">Capienza effettiva nota</div>
-          <div id="totalEff" class="value">546</div>
-          <div class="sub">Somma dei posti effettivi solo dove il dato è disponibile.</div>
-        </div>
-        <div class="stat">
-          <div class="label">Utilizzo medio sui dati noti</div>
-          <div id="knownPct" class="value">50,8%</div>
-          <div class="sub">Rapporto tra capienza effettiva nota e capienza teorica degli 8 CPR con dato disponibile.
-          </div>
-        </div>
-        <div class="stat">
-          <div class="label">Scarto complessivo noto</div>
-          <div id="knownGap" class="value">−528</div>
-          <div class="sub">Differenza tra capienza teorica ed effettiva considerando solo i CPR con dato disponibile.
-          </div>
-        </div>
-      </section>
-      <section class="main">
-        <article class="card">
-          <div class="section-head">
-            <div>
-              <h2>Confronto per singolo CPR</h2>
-              <p>
-                Ogni barra mostra la capienza massima teorica e, in sovrapposizione, la capienza effettiva.
-                Per <strong>Macomer</strong> e <strong>Trapani</strong> la quota effettiva è indicata come non
-                disponibile.
-              </p>
-            </div>
-            <div aria-hidden="true" class="legend">
-              <div class="item"><span class="swatch max"></span> Capienza massima</div>
-              <div class="item"><span class="swatch eff"></span> Capienza effettiva</div>
-              <div class="item"><span class="swatch na"></span> Dato non fornito</div>
-            </div>
-          </div>
-          <div id="rows" class="rows"></div>
-        </article>
-        <aside class="side">
-          <section class="card hero-card"><span class="mini">In sintesi</span>
-            <h2 class="callout">Poco più di 1 posto su 2 risulta effettivamente disponibile nei CPR con dato noto.</h2>
-            <p>
-              Il disallineamento è particolarmente marcato nei centri più grandi. Il caso più estremo è
-              <strong>Roma</strong>,
-              con <strong>58</strong> posti effettivi a fronte di <strong>210</strong> teorici.
-            </p>
-            <div class="mini-stats">
-              <div class="mini-box">
-                <div class="k">CPR ≥ 80%</div>
-                <div id="highCenters" class="v">2</div>
-                <div class="t">Brindisi e Caltanissetta superano l’80% di utilizzo.</div>
-              </div>
-              <div class="mini-box">
-                <div class="k">CPR &lt; 50%</div>
-                <div id="lowCenters" class="v">4</div>
-                <div class="t">Gradisca d’Isonzo, Milano, Roma e Torino restano sotto metà capienza.</div>
-              </div>
-            </div>
-          </section>
-          <section class="card insight-card">
-            <h3>Scostamenti più ampi</h3>
-            <div id="gapList" class="insight-list"></div>
-          </section>
-          <section class="card rank-card">
-            <h3>Utilizzo più alto e più basso</h3>
-            <div id="rankGrid" class="rank-grid"></div>
-          </section>
-        </aside>
-      </section>
-      <footer>
-        <div class="foot-left"><strong>Nota di lettura:</strong> “Dato non fornito” significa che il valore di capienza
-          effettiva non è disponibile
-          nella tabella di partenza. Percentuali, scarti complessivi e confronti sintetici sulla capienza effettiva sono
-          quindi
-          calcolati solo sui CPR per cui il dato è riportato.
-        </div>
-      </footer>
+      <nav class="nav">
+        <a href="#il-report">Il report</a>
+        <a href="#scarica-il-report">Scarica il PDF</a>
+        <a href="#infografiche">Infografica</a>
+        <a href="#qa-con-il-chatbot">Q&amp;A</a>
+        <a
+          id="english-link"
+          class="lang-switch notranslate"
+          translate="no"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >English</a>
+      </nav>
     </div>
-    <script>
-      const data = [
+  </header>
+
+  <section class="shell hero">
+    <section aria-labelledby="site-title" class="hero-card">
+      <div class="hero-grid">
+        <div>
+          <div class="intro-text">
+            Secondo rapporto di monitoraggio del
+            <span class="notranslate term-lock" translate="no">Tavolo Asilo e Immigrazione</span>
+            sui <span class="notranslate term-lock" translate="no">CPR</span> di Bari, Brindisi, Caltanissetta, Gradisca d’Isonzo,
+            Macomer, Milano, Palazzo San Gervasio, Roma, Torino e Trapani.
+          </div>
+
+          <h1 id="site-title">
+            <span class="notranslate term-lock" translate="no">CPR</span> d'Italia: istituzioni totali
+          </h1>
+
+          <div aria-label="Azioni rapide" class="hero-actions">
+            <a href="#il-report" class="btn btn-primary">Esplora le sezioni</a>
+            <a href="#scarica-il-report" class="btn btn-ghost">Vai al download</a>
+          </div>
+        </div>
+
+        <aside aria-label="Panoramica contenuti" class="hero-panel">
+          <ul class="mini-list">
+            <li><span>Perché questo report?</span><a href="#il-report" class="mini-jump">Vai</a></li>
+            <li><span>Scarica il report</span><a href="#scarica-il-report" class="mini-jump">Vai</a></li>
+            <li><span>Infografica: l’(in)utilità dei <span class="notranslate term-lock" translate="no">CPR</span></span><a href="#infografiche" class="mini-jump">Vai</a></li>
+            <li><span>Q&amp;A con il chatbot</span><a href="#qa-con-il-chatbot" class="mini-jump">Vai</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </section>
+
+  <main class="shell">
+    <div class="stack-sections">
+      <div class="top-sections">
+        <section id="il-report" aria-labelledby="title-il-report" class="section-card">
+          <div class="section-header">
+            <div aria-hidden="true" class="section-index">01</div>
+            <div class="status">In evidenza</div>
+          </div>
+
+          <div>
+            <h2 id="title-il-report" class="section-title">Perché questo report</h2>
+            <div class="section-text">
+              Perché il <span class="notranslate term-lock" translate="no">Tavolo Asilo e Immigrazione</span> continua a documentare e denunciare
+              le violazioni nei <span class="notranslate term-lock" translate="no">CPR</span>?
+              <br /><br />
+              Ecco perché, in cinque punti:
+            </div>
+          </div>
+
+          <ol class="summary">
+            <li>Perché è necessario mettere in luce la <b>natura illegittima, inefficace e disumana</b> della detenzione amministrativa e dei <span class="notranslate term-lock" translate="no">CPR</span>.</li>
+            <li>Perché inchieste pluridecennali confermano <b>violazioni sistematiche dei diritti</b> fondamentali.</li>
+            <li>Perché i <span class="notranslate term-lock" translate="no">CPR</span> sono un’<b>aberrazione strutturale</b> — e non accidentale — <b>del sistema</b>.</li>
+            <li>Perché i <span class="notranslate term-lock" translate="no">CPR</span> sono costosi e falliscono gli obiettivi dichiarati con <b>spreco di risorse pubbliche</b>.</li>
+            <li>Perché le conseguenze per le persone trattenute sono <b>sofferenza, degrado</b> e, in alcuni casi, morte.</li>
+          </ol>
+        </section>
+
+        <section id="scarica-il-report" aria-labelledby="title-scarica" class="section-card">
+          <div class="section-header">
+            <div aria-hidden="true" class="section-index">02</div>
+            <div class="status">PDF</div>
+          </div>
+
+          <div>
+            <h2 id="title-scarica" class="section-title">Scarica il report</h2>
+            <p class="section-text centered">
+              Scarica il report completo in formato PDF
+              <br />
+              <small><strong>Nota:</strong> il PDF è in italiano.</small>
+            </p>
+
+            <figure aria-label="Copertina del report" class="cover">
+              <img
+                src="https://raw.githubusercontent.com/ematarti/Report_CPR_2026/main/CPR_report_cover.png"
+                alt="Copertina del report"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <a
+            href="https://www.emergency.it/wp-content/uploads/2026/01/CPR-dItalia_istituzioni-totali.pdf"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >Scarica il PDF</a>
+        </section>
+      </div>
+
+      <div class="single-section-stack">
+        <section id="infografiche" aria-labelledby="title-infografiche" class="section-card">
+          <div class="section-header">
+            <div aria-hidden="true" class="section-index">03</div>
+            <div class="status">Visual abstract</div>
+          </div>
+
+          <div>
+            <h2 id="title-infografiche" class="section-title">
+              Infografica: l’(in)utilità dei <span class="notranslate term-lock" translate="no">CPR</span> | capienza massima vs effettiva
+            </h2>
+          </div>
+
+          <div class="embed">
+            <div class="info-poster">
+              <header class="info-header">
+                <div>
+                  <div class="eyebrow">
+                    <span class="dot"></span> Visual abstract | <span class="notranslate term-lock" translate="no">CPR</span> in Italia
+                  </div>
+
+                  <h1>Capienza massima vs capienza effettiva nei 10 <span class="notranslate term-lock" translate="no">CPR</span> in Italia</h1>
+
+                  <p class="subtitle">
+                    Il confronto mostra che la disponibilità effettiva dei posti è spesso molto inferiore alla capienza teorica.
+                    Nei due <span class="notranslate term-lock" translate="no">CPR</span> con dato non fornito, il confronto resta incompleto.
+                  </p>
+
+                  <div class="badges">
+                    <span class="badge">10 <span class="notranslate term-lock" translate="no">CPR</span> considerati</span>
+                    <span class="badge">2 <span class="notranslate term-lock" translate="no">CPR</span> con dato effettivo non disponibile</span>
+                    <span class="badge">Confronto diretto tra capienza teorica e reale</span>
+                  </div>
+                </div>
+
+                <aside class="headline-note">
+                  <div class="label">Messaggio chiave</div>
+                  <div class="big">546 posti effettivi noti</div>
+                  <p>
+                    Su <strong>1.074</strong> posti teorici riferiti agli 8 <span class="notranslate term-lock" translate="no">CPR</span> con dato disponibile,
+                    la capienza effettiva nota corrisponde a <strong>50,8%</strong>. La lettura dei totali effettivi esclude quindi
+                    <strong>Macomer</strong> e <strong>Trapani</strong>, per i quali il dato non è fornito.
+                  </p>
+                </aside>
+              </header>
+
+              <section class="info-stats">
+                <div class="info-stat">
+                  <div class="label">Capienza massima totale</div>
+                  <div id="totalMax" class="value">1.238</div>
+                  <div class="sub">Somma della capienza teorica dichiarata per tutti i 10 <span class="notranslate term-lock" translate="no">CPR</span>.</div>
+                </div>
+                <div class="info-stat">
+                  <div class="label">Capienza effettiva nota</div>
+                  <div id="totalEff" class="value">546</div>
+                  <div class="sub">Somma dei posti effettivi solo dove il dato è disponibile.</div>
+                </div>
+                <div class="info-stat">
+                  <div class="label">Utilizzo medio sui dati noti</div>
+                  <div id="knownPct" class="value">50,8%</div>
+                  <div class="sub">Rapporto tra capienza effettiva nota e capienza teorica degli 8 <span class="notranslate term-lock" translate="no">CPR</span> con dato disponibile.</div>
+                </div>
+                <div class="info-stat">
+                  <div class="label">Scarto complessivo noto</div>
+                  <div id="knownGap" class="value">−528</div>
+                  <div class="sub">Differenza tra capienza teorica ed effettiva considerando solo i <span class="notranslate term-lock" translate="no">CPR</span> con dato disponibile.</div>
+                </div>
+              </section>
+
+              <section class="info-main">
+                <article class="info-card">
+                  <div class="info-head">
+                    <div>
+                      <h2>Confronto per singolo <span class="notranslate term-lock" translate="no">CPR</span></h2>
+                      <p>
+                        Ogni barra mostra la capienza massima teorica e, in sovrapposizione, la capienza effettiva.
+                        Per <strong>Macomer</strong> e <strong>Trapani</strong> la quota effettiva è indicata come non disponibile.
+                      </p>
+                    </div>
+
+                    <div aria-hidden="true" class="legend">
+                      <div class="item"><span class="swatch max"></span> Capienza massima</div>
+                      <div class="item"><span class="swatch eff"></span> Capienza effettiva</div>
+                      <div class="item"><span class="swatch na"></span> Dato non fornito</div>
+                    </div>
+                  </div>
+
+                  <div id="rows" class="rows"></div>
+                </article>
+
+                <aside class="info-side">
+                  <section class="info-card hero-card-mini">
+                    <span class="mini">In sintesi</span>
+                    <h2 class="callout">Poco più di 1 posto su 2 risulta effettivamente disponibile nei <span class="notranslate term-lock" translate="no">CPR</span> con dato noto.</h2>
+                    <p>
+                      Il disallineamento è particolarmente marcato nei centri più grandi. Il caso più estremo è <strong>Roma</strong>,
+                      con <strong>58</strong> posti effettivi a fronte di <strong>210</strong> teorici.
+                    </p>
+
+                    <div class="mini-stats">
+                      <div class="mini-box">
+                        <div class="k"><span class="notranslate term-lock" translate="no">CPR</span> ≥ 80%</div>
+                        <div id="highCenters" class="v">2</div>
+                        <div class="t">Brindisi e Caltanissetta superano l’80% di utilizzo.</div>
+                      </div>
+
+                      <div class="mini-box">
+                        <div class="k"><span class="notranslate term-lock" translate="no">CPR</span> &lt; 50%</div>
+                        <div id="lowCenters" class="v">4</div>
+                        <div class="t">Gradisca d’Isonzo, Milano, Roma e Torino restano sotto metà capienza.</div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="info-card insight-card">
+                    <h3>Scostamenti più ampi</h3>
+                    <div id="gapList" class="insight-list"></div>
+                  </section>
+
+                  <section class="info-card rank-card">
+                    <h3>Utilizzo più alto e più basso</h3>
+                    <div id="rankGrid" class="rank-grid"></div>
+                  </section>
+                </aside>
+              </section>
+
+              <footer class="info-footer">
+                <div class="foot-left">
+                  <strong>Nota di lettura:</strong> “Dato non fornito” significa che il valore di capienza effettiva non è disponibile
+                  nella tabella di partenza. Percentuali, scarti complessivi e confronti sintetici sulla capienza effettiva sono quindi
+                  calcolati solo sui <span class="notranslate term-lock" translate="no">CPR</span> per cui il dato è riportato.
+                </div>
+              </footer>
+            </div>
+          </div>
+        </section>
+
+        <section id="qa-con-il-chatbot" aria-labelledby="title-qa" class="section-card">
+          <div class="section-header">
+            <div aria-hidden="true" class="section-index">04</div>
+            <div class="status">Chatbot</div>
+          </div>
+
+          <div>
+            <h2 id="title-qa" class="section-title">Hai una domanda sul report? Il chatbot risponde!</h2>
+          </div>
+
+          <div id="bp-embedded-webchat"></div>
+          <script src="https://files.bpcontent.cloud/2026/02/11/15/20260211154922-QE1NF98Z.js" defer></script>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer aria-label="Crediti e informazioni" class="shell">
+    <div class="footer-card">
+      <p>
+        Questo report è stato realizzato dalle organizzazioni aderenti al
+        <span class="notranslate term-lock" translate="no">Tavolo Asilo e Immigrazione (TAI)</span>,
+        una rete della società civile impegnata nella tutela dei diritti delle persone migranti, rifugiate e richiedenti asilo.
+      </p>
+
+      <p class="orgs notranslate" translate="no">
+        A Buon Diritto, ACLI, Action Aid, Agenzia Scalabriniana per la Cooperazione allo Sviluppo, Amnesty International Italia,
+        ARCI, ASGI, Avvocato di Strada Onlus, Caritas Italiana, Casa dei Diritti Sociali, Centro Astalli, CGIL, CIES, CIR, CNCA,
+        Commissione Migranti e GPIC Missionari Comboniani Italia, Comunità di Sant’Egidio, Comunità Papa Giovanni XXIII, CoNNGI,
+        Emergency, Ero Straniero, Europasilo, FCEI, Fondazione Migrantes, Forum per cambiare l’ordine delle cose,
+        International Rescue Committee Italia, INTERSOS, Legambiente, Medici del Mondo Italia, Medici per i Diritti Umani,
+        Movimento Italiani senza Cittadinanza, Medici Senza Frontiere Italia, Oxfam Italia, Re.Co.Sol, Red Nova,
+        Refugees Welcome Italia, Save the Children, Senza Confine, SIMM, UIL, UNIRE.
+      </p>
+
+      <p class="date">Il Rapporto è stato ultimato il 21 gennaio 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const data = [
       { name: "Bari", max: 126, eff: 82 },
       { name: "Brindisi", max: 48, eff: 40 },
       { name: "Caltanissetta", max: 92, eff: 81 },
@@ -2019,11 +1425,15 @@ footer {
       { name: "Trapani", max: 114, eff: null }
     ];
 
-    const fmtInt = (n) => new Intl.NumberFormat('it-IT').format(n);
-    const fmtPct = (n) => new Intl.NumberFormat('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n) + "%";
+    const fmtInt = (n) => new Intl.NumberFormat("it-IT").format(n);
+    const fmtPct = (n) =>
+      new Intl.NumberFormat("it-IT", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
+      }).format(n) + "%";
 
     const totalMax = data.reduce((s, d) => s + d.max, 0);
-    const known = data.filter(d => d.eff !== null);
+    const known = data.filter((d) => d.eff !== null);
     const totalKnownMax = known.reduce((s, d) => s + d.max, 0);
     const totalEff = known.reduce((s, d) => s + d.eff, 0);
     const knownPct = (totalEff / totalKnownMax) * 100;
@@ -2032,22 +1442,22 @@ footer {
     document.getElementById("totalMax").textContent = fmtInt(totalMax);
     document.getElementById("totalEff").textContent = fmtInt(totalEff);
     document.getElementById("knownPct").textContent = fmtPct(knownPct);
-    document.getElementById("knownGap").textContent = (knownGap < 0 ? "−" : "") + fmtInt(Math.abs(knownGap));
+    document.getElementById("knownGap").textContent =
+      (knownGap < 0 ? "−" : "") + fmtInt(Math.abs(knownGap));
 
-    const highCenters = known.filter(d => (d.eff / d.max) >= 0.8).length;
-    const lowCenters = known.filter(d => (d.eff / d.max) < 0.5).length;
+    const highCenters = known.filter((d) => (d.eff / d.max) >= 0.8).length;
+    const lowCenters = known.filter((d) => (d.eff / d.max) < 0.5).length;
     document.getElementById("highCenters").textContent = fmtInt(highCenters);
     document.getElementById("lowCenters").textContent = fmtInt(lowCenters);
 
     const rows = document.getElementById("rows");
-    data.forEach(d => {
+    data.forEach((d) => {
       const maxW = 100;
       const effW = d.eff !== null ? (d.eff / d.max) * 100 : 0;
       const pct = d.eff !== null ? (d.eff / d.max) * 100 : null;
 
       const row = document.createElement("div");
       row.className = "row";
-
       row.innerHTML = `
         <div class="name">
           <div class="title">${d.name}</div>
@@ -2057,8 +1467,7 @@ footer {
           <div class="bar-max" style="width:${maxW}%;"></div>
           ${d.eff === null
             ? `<div class="bar-na" style="width:${maxW}%;"></div>`
-            : `<div class="bar-eff" style="width:${effW}%;"></div>`
-          }
+            : `<div class="bar-eff" style="width:${effW}%;"></div>`}
         </div>
         <div class="pct">
           <strong>${pct === null ? `<span class="na">N/D</span>` : fmtPct(pct)}</strong>
@@ -2070,7 +1479,7 @@ footer {
 
     const gapList = document.getElementById("gapList");
     const topGaps = known
-      .map(d => ({ ...d, gap: d.max - d.eff, pct: (d.eff / d.max) * 100 }))
+      .map((d) => ({ ...d, gap: d.max - d.eff, pct: (d.eff / d.max) * 100 }))
       .sort((a, b) => b.gap - a.gap)
       .slice(0, 3);
 
@@ -2090,17 +1499,17 @@ footer {
 
     const rankGrid = document.getElementById("rankGrid");
     const sortedByPct = known
-      .map(d => ({ ...d, pct: (d.eff / d.max) * 100 }))
+      .map((d) => ({ ...d, pct: (d.eff / d.max) * 100 }))
       .sort((a, b) => b.pct - a.pct);
 
     const highlights = [
-      { label: "Utilizzo più alto", value: `${sortedByPct[0].name}`, score: fmtPct(sortedByPct[0].pct), cls: "good" },
-      { label: "Secondo più alto", value: `${sortedByPct[1].name}`, score: fmtPct(sortedByPct[1].pct), cls: "good" },
-      { label: "Utilizzo più basso", value: `${sortedByPct[sortedByPct.length - 1].name}`, score: fmtPct(sortedByPct[sortedByPct.length - 1].pct), cls: "low" },
-      { label: "Secondo più basso", value: `${sortedByPct[sortedByPct.length - 2].name}`, score: fmtPct(sortedByPct[sortedByPct.length - 2].pct), cls: "low" }
+      { label: "Utilizzo più alto", value: sortedByPct[0].name, score: fmtPct(sortedByPct[0].pct), cls: "good" },
+      { label: "Secondo più alto", value: sortedByPct[1].name, score: fmtPct(sortedByPct[1].pct), cls: "good" },
+      { label: "Utilizzo più basso", value: sortedByPct[sortedByPct.length - 1].name, score: fmtPct(sortedByPct[sortedByPct.length - 1].pct), cls: "low" },
+      { label: "Secondo più basso", value: sortedByPct[sortedByPct.length - 2].name, score: fmtPct(sortedByPct[sortedByPct.length - 2].pct), cls: "low" }
     ];
 
-    highlights.forEach(h => {
+    highlights.forEach((h) => {
       const pill = document.createElement("div");
       pill.className = `pill ${h.cls}`;
       pill.innerHTML = `
@@ -2112,14 +1521,124 @@ footer {
       `;
       rankGrid.appendChild(pill);
     });
-    </script>
-  </template>
-  <script>
+
     (function () {
-      const frame = document.getElementById('infografica-frame');
-      const tpl = document.getElementById('infographic-src');
-      if (frame && tpl) {
-        frame.srcdoc = tpl.innerHTML.trim();
+      const protectedTerms = [
+        "Tavolo Asilo e Immigrazione",
+        "A Buon Diritto",
+        "Action Aid",
+        "Amnesty International Italia",
+        "International Rescue Committee Italia",
+        "Refugees Welcome Italia",
+        "Save the Children",
+        "Medici Senza Frontiere Italia",
+        "Medici del Mondo Italia",
+        "Medici per i Diritti Umani",
+        "Agenzia Scalabriniana per la Cooperazione allo Sviluppo",
+        "Commissione Migranti e GPIC Missionari Comboniani Italia",
+        "Movimento Italiani senza Cittadinanza",
+        "Comunità Papa Giovanni XXIII",
+        "Comunità di Sant’Egidio",
+        "Fondazione Migrantes",
+        "Forum per cambiare l’ordine delle cose",
+        "Palazzo San Gervasio",
+        "Gradisca d'Isonzo",
+        "Gradisca d’Isonzo",
+        "INTERSOS",
+        "Legambiente",
+        "Europasilo",
+        "Emergency",
+        "Oxfam Italia",
+        "Caritas Italiana",
+        "Centro Astalli",
+        "Casa dei Diritti Sociali",
+        "Avvocato di Strada Onlus",
+        "CPR",
+        "TAI",
+        "ASGI",
+        "ARCI",
+        "ACLI",
+        "CGIL",
+        "CIES",
+        "CIR",
+        "CNCA",
+        "CoNNGI",
+        "FCEI",
+        "Re.Co.Sol",
+        "SIMM",
+        "UIL",
+        "UNIRE"
+      ].sort((a, b) => b.length - a.length);
+
+      const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(protectedTerms.map(escapeRegExp).join("|"), "g");
+
+      function wrapProtectedTerms(root) {
+        const walker = document.createTreeWalker(
+          root,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode(node) {
+              if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+              const parent = node.parentElement;
+              if (!parent) return NodeFilter.FILTER_REJECT;
+              if (parent.closest("script, style, textarea, pre, code, .notranslate, [translate='no']")) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              regex.lastIndex = 0;
+              return regex.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+          }
+        );
+
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        textNodes.forEach((node) => {
+          const text = node.nodeValue;
+          regex.lastIndex = 0;
+          if (!regex.test(text)) return;
+
+          const frag = document.createDocumentFragment();
+          let lastIndex = 0;
+
+          text.replace(regex, (match, offset) => {
+            if (offset > lastIndex) {
+              frag.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+            }
+            const span = document.createElement("span");
+            span.className = "notranslate term-lock";
+            span.setAttribute("translate", "no");
+            span.textContent = match;
+            frag.appendChild(span);
+            lastIndex = offset + match.length;
+            return match;
+          });
+
+          if (lastIndex < text.length) {
+            frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+          }
+
+          node.parentNode.replaceChild(frag, node);
+        });
+      }
+
+      function setEnglishLink() {
+        const link = document.getElementById("english-link");
+        const version = document.querySelector('meta[name="site-version"]')?.content || "1";
+        if (!link) return;
+
+        const sourceUrl = new URL(window.location.origin + window.location.pathname);
+        sourceUrl.searchParams.set("v", version);
+
+        link.href =
+          "https://translate.google.com/translate?sl=it&tl=en&u=" +
+          encodeURIComponent(sourceUrl.toString());
+      }
+
+      if (document.body) {
+        wrapProtectedTerms(document.body);
+        setEnglishLink();
       }
     })();
   </script>
